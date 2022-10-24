@@ -36,5 +36,6 @@ public class BtControler : MonoBehaviour
     public void AleColor()
     {
         gameObject.GetComponent<Image>().color = aleColor;
+        gameObject.GetComponent<Image>().sprite = main.aleSprites[Random.Range(0,main.aleSprites.Length)];
     }
 }

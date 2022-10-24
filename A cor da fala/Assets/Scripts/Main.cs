@@ -10,17 +10,20 @@ public class Main : MonoBehaviour
     public int ale;
     public GameObject[] Bt;
     public BtControler[] btControler;
+    public Sprite[] aleSprites;
+    public Sprite mainSprite;
     private float timer;
     // Start is called before the first frame update
     void Start()
     {
         mainColor = gameObject.GetComponent<SpriteRenderer>().color;
-
+        mainSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
     }
 
     // Update is called once per frame
     void Update()
     {
+        gameObject.GetComponent<SpriteRenderer>().sprite = mainSprite;
         timer = timer += Time.deltaTime;
         if (timer <= 0.001f)
         {
@@ -32,9 +35,11 @@ public class Main : MonoBehaviour
     }
     public void SetColor()
     {
+        mainSprite = aleSprites[Random.Range(0, aleSprites.Length)];
         mainColor = aleColor;
         if (ale <= 10)
         {
+            Bt[0].GetComponent<Image>().sprite = mainSprite;
             Bt[0].GetComponent<Image>().color = aleColor;
             btControler[1].AleColor();
             btControler[2].AleColor();
@@ -45,6 +50,7 @@ public class Main : MonoBehaviour
         else if (ale <= 20&& ale >10)
         {
             Bt[1].GetComponent<Image>().color = aleColor;
+            Bt[1].GetComponent<Image>().sprite = mainSprite;
             btControler[0].AleColor();
             btControler[2].AleColor();
             btControler[3].AleColor();
@@ -54,6 +60,7 @@ public class Main : MonoBehaviour
         else if (ale <= 30 &&ale > 20)
         {
             Bt[2].GetComponent<Image>().color = aleColor;
+            Bt[2].GetComponent<Image>().sprite = mainSprite;
             btControler[1].AleColor();
             btControler[0].AleColor();
             btControler[3].AleColor();
@@ -63,6 +70,7 @@ public class Main : MonoBehaviour
         if (ale <= 40 && ale > 30)
         {
             Bt[3].GetComponent<Image>().color = aleColor;
+            Bt[3].GetComponent<Image>().sprite = mainSprite;
             btControler[1].AleColor();
             btControler[2].AleColor();
             btControler[0].AleColor();
@@ -72,6 +80,7 @@ public class Main : MonoBehaviour
         else if (ale <= 50 && ale > 40)
         {
             Bt[4].GetComponent<Image>().color = aleColor;
+            Bt[4].GetComponent<Image>().sprite = mainSprite;
             btControler[1].AleColor();
             btControler[2].AleColor();
             btControler[3].AleColor();
@@ -81,6 +90,7 @@ public class Main : MonoBehaviour
         if (ale <= 60 && ale > 50)
         {
             Bt[5].GetComponent<Image>().color = aleColor;
+            Bt[5].GetComponent<Image>().sprite = mainSprite;
             btControler[1].AleColor();
             btControler[2].AleColor();
             btControler[3].AleColor();
