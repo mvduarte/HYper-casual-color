@@ -15,10 +15,20 @@ public class Main : MonoBehaviour
     public Sprite mainSprite;
     private float timer;
     public Image timeBar;
-    public bool play = true;
+    public bool play;
+    public GameObject gameOver;
+    private AudioControler audCnt;
+    public AudioClip[] audios;
+    public float maxBar=10,metas=15;
+    private GameControler gC;
+    public float aumento=0.5f;
+    
     // Start is called before the first frame update
     void Start()
     {
+        play=true;
+        gC = FindObjectOfType(typeof(GameControler))as GameControler;
+        audCnt = FindObjectOfType(typeof(AudioControler))as AudioControler;
         mainColor = gameObject.GetComponent<SpriteRenderer>().color;
         mainSprite = gameObject.GetComponent<SpriteRenderer>().sprite;
         
@@ -27,9 +37,26 @@ public class Main : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (timeFinal >= 10)
+        if(gC.points>=metas)
         {
-            timeFinal = 10;
+            maxBar-= aumento;
+            metas+=15;
+        }
+        if(metas>=120&&metas<=270)
+        {
+            aumento=0.4f;
+        }
+        else if(metas>270&&metas<420)
+        {
+            aumento=0.2f;
+        }
+        if(maxBar<=0.5f)
+        {
+            Application.Quit();
+        }
+        if (timeFinal >= maxBar)
+        {
+            timeFinal = maxBar;
         }
         else if (timeFinal <= 0)
         {
@@ -46,6 +73,11 @@ public class Main : MonoBehaviour
         aleColor = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
         gameObject.GetComponent<SpriteRenderer>().color = mainColor;
         timeBar.fillAmount = timeFinal / 10;
+        if(timeFinal<=0)
+        {
+            audCnt.PlaySound(audios[0]);
+            gameOver.SetActive(true);
+        }
     }
     public void SetColor()
     {

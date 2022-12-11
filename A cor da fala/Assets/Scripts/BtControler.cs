@@ -10,9 +10,12 @@ public class BtControler : MonoBehaviour
     public Color aleColor;
     private float timer;
     private bool act= true;
+    private AudioControler audCnt;
+    public AudioClip[] audios;
     // Start is called before the first frame update
     void Start()
     {
+        audCnt = FindObjectOfType(typeof(AudioControler))as AudioControler;
         main = FindObjectOfType(typeof(Main))as Main;
         gc = FindObjectOfType(typeof(GameControler)) as GameControler;
         aleColor = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
@@ -33,12 +36,14 @@ public class BtControler : MonoBehaviour
     {
         if (gameObject.GetComponent<Image>().color == main.mainColor)
         {
+            audCnt.PlaySound(audios[0]);
             main.timeFinal += 5;
             gc.points++;
             main.SetColor();
         }
         else
         {
+            audCnt.PlaySound(audios[1]);
             main.timeFinal -= 5;
             main.SetColor();
         }
