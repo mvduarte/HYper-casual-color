@@ -72,7 +72,7 @@ public class Main : MonoBehaviour
         ale = Random.Range(0, 60);
         aleColor = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), 1);
         gameObject.GetComponent<SpriteRenderer>().color = mainColor;
-        timeBar.fillAmount = timeFinal / 10;
+        timeBar.fillAmount = timeFinal / maxBar;
         if(timeFinal<=0)
         {
             audCnt.PlaySound(audios[0]);
